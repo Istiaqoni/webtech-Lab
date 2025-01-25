@@ -1,0 +1,21 @@
+CREATE DATABASE online_bookstore;
+USE online_bookstore;
+
+-- Books Table
+CREATE TABLE books (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    author VARCHAR(255) NOT NULL,
+    status ENUM('available', 'borrowed') DEFAULT 'available',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Borrowed Books Table
+CREATE TABLE borrowed_books (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    book_id INT NOT NULL,
+    student_name VARCHAR(255) NOT NULL,
+    token VARCHAR(255) NOT NULL,
+    borrowed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (book_id) REFERENCES books(id)
+);
